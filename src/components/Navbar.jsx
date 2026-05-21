@@ -61,7 +61,7 @@ const Navbar = () => {
 
     getSession();
 
-  }, [user]);
+  }, []);
 
   const handleLogout =
     async () => {
@@ -76,7 +76,8 @@ const Navbar = () => {
         );
 
         setUser(null);
-
+console.log(user);
+        return;
         window.location.href =
           "/login";
 
@@ -85,7 +86,7 @@ const Navbar = () => {
         console.log(error);
       }
     };
-
+console.log(user);
   const navLinks = (
     <>
       <li>

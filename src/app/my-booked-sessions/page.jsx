@@ -12,11 +12,11 @@ export default function MyBookedSessions() {
   const [sessions, setSessions] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Dummy Logged User Email
+
   const currentUserEmail = "student@gmail.com";
 
   useEffect(() => {
-    // Dummy Booking Data
+ 
     const bookingData = [
       {
         _id: 1,
@@ -44,7 +44,6 @@ export default function MyBookedSessions() {
       },
     ];
 
-    // Filter Logged User Data
     const userBookings = bookingData.filter(
       (booking) => booking.email === currentUserEmail
     );
@@ -66,7 +65,6 @@ export default function MyBookedSessions() {
     setSessions(updated);
   };
 
-  // Loading
   if (loading) {
     return (
       <div className="min-h-screen flex justify-center items-center">
@@ -79,7 +77,7 @@ export default function MyBookedSessions() {
     <div className="min-h-screen bg-slate-50 py-12 px-4">
       <div className="max-w-7xl mx-auto">
 
-        {/* HEADING */}
+     
         <div className="mb-10">
           <h1 className="text-4xl font-extrabold text-slate-800">
             My Booked Sessions
@@ -90,7 +88,6 @@ export default function MyBookedSessions() {
           </p>
         </div>
 
-        {/* EMPTY STATE */}
         {sessions.length === 0 ? (
           <div className="bg-white rounded-3xl p-16 text-center shadow-sm border">
             <h2 className="text-3xl font-bold text-slate-700">
@@ -105,7 +102,7 @@ export default function MyBookedSessions() {
           <div className="overflow-x-auto bg-white rounded-3xl shadow-sm border border-slate-100">
 
             <table className="table">
-              {/* HEAD */}
+             
               <thead className="bg-slate-100 text-slate-700">
                 <tr>
                   <th>#</th>
@@ -122,12 +119,12 @@ export default function MyBookedSessions() {
                 {sessions.map((session, index) => (
                   <tr key={session._id} className="hover">
 
-                    {/* INDEX */}
+                   
                     <td className="font-semibold">
                       {index + 1}
                     </td>
 
-                    {/* TUTOR */}
+                
                     <td>
                       <div className="flex items-center gap-3">
                         <div className="bg-primary/10 p-3 rounded-xl">
@@ -142,7 +139,6 @@ export default function MyBookedSessions() {
                       </div>
                     </td>
 
-                    {/* STUDENT */}
                     <td>
                       <div className="flex items-center gap-2">
                         <User2 className="w-4 h-4 text-slate-500" />
@@ -150,7 +146,6 @@ export default function MyBookedSessions() {
                       </div>
                     </td>
 
-                    {/* EMAIL */}
                     <td>
                       <div className="flex items-center gap-2">
                         <Mail className="w-4 h-4 text-slate-500" />
@@ -166,7 +161,6 @@ export default function MyBookedSessions() {
                       </div>
                     </td>
 
-                    {/* STATUS */}
                     <td>
                       <span
                         className={`px-4 py-2 rounded-full text-xs font-bold
@@ -183,7 +177,6 @@ export default function MyBookedSessions() {
                       </span>
                     </td>
 
-                    {/* ACTION */}
                     <td>
                       <button
                         onClick={() =>
