@@ -17,11 +17,8 @@ const Footer = () => {
 
       <div className="max-w-7xl mx-auto px-6 py-14">
 
-        {/* TOP GRID */}
-
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
 
-          {/* BRAND */}
 
           <div>
 
@@ -39,7 +36,6 @@ const Footer = () => {
 
             </p>
 
-            {/* SOCIAL */}
 
             <div className="flex gap-3 mt-6">
 
@@ -71,7 +67,7 @@ const Footer = () => {
 
           </div>
 
-          {/* SERVICES */}
+       
 
           <div>
 
