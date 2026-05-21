@@ -143,9 +143,6 @@ const Banner = () => {
 
           </motion.div>
 
-
-         
-
           <motion.div
             initial={{ opacity: 0, x: 80 }}
             animate={{ opacity: 1, x: 0 }}
@@ -157,7 +154,7 @@ const Banner = () => {
             <div className="relative">
 
               <img
-                src="https://i.ibb.co/fdz7K9R/tutor1.jpg"
+                src="https://images.unsplash.com/photo-1517841905240-472988babdf9"
                 alt="Tutor"
                 className="rounded-[40px] shadow-2xl border border-white/10 object-cover w-full max-w-xl mx-auto"
               />
