@@ -61,7 +61,7 @@ const Navbar = () => {
 
     getSession();
 
-  }, []);
+  }, [user]);
 
   const handleLogout =
     async () => {

@@ -1,98 +1,211 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
+import { useEffect, useState } from "react";
+import {
+  CalendarDays,
+  Mail,
+  Trash2,
+  User2,
+} from "lucide-react";
 
-export default function MyBookedSessionsPage() {
+export default function MyBookedSessions() {
+  const [sessions, setSessions] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Dummy Logged User Email
+  const currentUserEmail = "student@gmail.com";
+
   useEffect(() => {
-    document.title = 'My Booked Sessions | MediQueue';
+    // Dummy Booking Data
+    const bookingData = [
+      {
+        _id: 1,
+        tutorName: "Dr. Sarah Ahmed",
+        studentName: "Mohammad",
+        email: "student@gmail.com",
+        date: "25 May 2026",
+        status: "confirmed",
+      },
+      {
+        _id: 2,
+        tutorName: "Tanvir Hasan",
+        studentName: "Mohammad",
+        email: "student@gmail.com",
+        date: "28 May 2026",
+        status: "pending",
+      },
+      {
+        _id: 3,
+        tutorName: "Nusrat Jahan",
+        studentName: "Rahim",
+        email: "rahim@gmail.com",
+        date: "29 May 2026",
+        status: "confirmed",
+      },
+    ];
+
+    // Filter Logged User Data
+    const userBookings = bookingData.filter(
+      (booking) => booking.email === currentUserEmail
+    );
+
+    setTimeout(() => {
+      setSessions(userBookings);
+      setLoading(false);
+    }, 1000);
   }, []);
 
-  const sessions = [
-    {
-      id: 1,
-      tutor: 'John Doe',
-      student: 'Alex',
-      email: 'alex@gmail.com',
-      status: 'Booked',
-    },
-    {
-      id: 2,
-      tutor: 'Sarah Khan',
-      student: 'Michael',
-      email: 'michael@gmail.com',
-      status: 'Pending',
-    },
-  ];
+  // Cancel Booking
+  const handleCancel = (id) => {
+    const updated = sessions.map((session) =>
+      session._id === id
+        ? { ...session, status: "cancelled" }
+        : session
+    );
+
+    setSessions(updated);
+  };
+
+  // Loading
+  if (loading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <span className="loading loading-spinner loading-lg text-primary"></span>
+      </div>
+    );
+  }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-20">
+    <div className="min-h-screen bg-slate-50 py-12 px-4">
+      <div className="max-w-7xl mx-auto">
 
-      <div className="text-center mb-10">
-        <h2 className="text-4xl font-bold text-primary">
-          My Booked Sessions
-        </h2>
+        {/* HEADING */}
+        <div className="mb-10">
+          <h1 className="text-4xl font-extrabold text-slate-800">
+            My Booked Sessions
+          </h1>
 
-        <p className="mt-3 text-gray-500">
-          Manage all your booked tutor sessions easily.
-        </p>
-      </div>
-
-      {sessions.length === 0 ? (
-        <div className="text-center py-20">
-          <h2 className="text-3xl font-bold text-gray-400">
-            No Booked Sessions Found
-          </h2>
+          <p className="text-slate-500 mt-2">
+            Manage all your booked tutor sessions easily.
+          </p>
         </div>
-      ) : (
-        <div className="overflow-x-auto bg-base-100 shadow-xl rounded-2xl">
 
-          <table className="table">
+        {/* EMPTY STATE */}
+        {sessions.length === 0 ? (
+          <div className="bg-white rounded-3xl p-16 text-center shadow-sm border">
+            <h2 className="text-3xl font-bold text-slate-700">
+              No Booked Sessions Found
+            </h2>
 
-            <thead className="bg-base-200">
-              <tr>
-                <th>#</th>
-                <th>Tutor Name</th>
-                <th>Student Name</th>
-                <th>Email</th>
-                <th>Status</th>
-                <th>Action</th>
-              </tr>
-            </thead>
+            <p className="text-slate-500 mt-3">
+              You haven’t booked any tutor sessions yet.
+            </p>
+          </div>
+        ) : (
+          <div className="overflow-x-auto bg-white rounded-3xl shadow-sm border border-slate-100">
 
-            <tbody>
-              {sessions.map((session, index) => (
-                <tr key={session.id}>
-                  <td>{index + 1}</td>
-
-                  <td className="font-semibold">
-                    {session.tutor}
-                  </td>
-
-                  <td>{session.student}</td>
-
-                  <td>{session.email}</td>
-
-                  <td>
-                    <span className="badge badge-success">
-                      {session.status}
-                    </span>
-                  </td>
-
-                  <td>
-                    <button className="btn btn-error btn-sm">
-                      Cancel
-                    </button>
-                  </td>
-
+            <table className="table">
+              {/* HEAD */}
+              <thead className="bg-slate-100 text-slate-700">
+                <tr>
+                  <th>#</th>
+                  <th>Tutor</th>
+                  <th>Student</th>
+                  <th>Email</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Action</th>
                 </tr>
-              ))}
-            </tbody>
+              </thead>
 
-          </table>
+              <tbody>
+                {sessions.map((session, index) => (
+                  <tr key={session._id} className="hover">
 
-        </div>
-      )}
+                    {/* INDEX */}
+                    <td className="font-semibold">
+                      {index + 1}
+                    </td>
 
+                    {/* TUTOR */}
+                    <td>
+                      <div className="flex items-center gap-3">
+                        <div className="bg-primary/10 p-3 rounded-xl">
+                          <User2 className="w-5 h-5 text-primary" />
+                        </div>
+
+                        <div>
+                          <h2 className="font-bold text-slate-700">
+                            {session.tutorName}
+                          </h2>
+                        </div>
+                      </div>
+                    </td>
+
+                    {/* STUDENT */}
+                    <td>
+                      <div className="flex items-center gap-2">
+                        <User2 className="w-4 h-4 text-slate-500" />
+                        {session.studentName}
+                      </div>
+                    </td>
+
+                    {/* EMAIL */}
+                    <td>
+                      <div className="flex items-center gap-2">
+                        <Mail className="w-4 h-4 text-slate-500" />
+                        {session.email}
+                      </div>
+                    </td>
+
+                    {/* DATE */}
+                    <td>
+                      <div className="flex items-center gap-2">
+                        <CalendarDays className="w-4 h-4 text-slate-500" />
+                        {session.date}
+                      </div>
+                    </td>
+
+                    {/* STATUS */}
+                    <td>
+                      <span
+                        className={`px-4 py-2 rounded-full text-xs font-bold
+                        ${
+                          session.status === "confirmed"
+                            ? "bg-green-100 text-green-700"
+                            : session.status === "pending"
+                            ? "bg-orange-100 text-orange-700"
+                            : "bg-red-100 text-red-700"
+                        }
+                      `}
+                      >
+                        {session.status}
+                      </span>
+                    </td>
+
+                    {/* ACTION */}
+                    <td>
+                      <button
+                        onClick={() =>
+                          handleCancel(session._id)
+                        }
+                        disabled={
+                          session.status === "cancelled"
+                        }
+                        className="btn btn-sm bg-red-500 hover:bg-red-600 border-none text-white rounded-xl"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                        Cancel
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+          </div>
+        )}
+      </div>
     </div>
   );
 }
