@@ -1,6 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import {
+  useRouter,
+} from "next/navigation";
 
 import {
   useEffect,
@@ -24,6 +27,11 @@ const Navbar = () => {
   const [user, setUser] =
     useState(null);
 
+  const router = useRouter();
+
+  const API_URL =
+    process.env.NEXT_PUBLIC_API_URL || "";
+
   const [loading, setLoading] =
     useState(true);
 
@@ -39,7 +47,10 @@ const Navbar = () => {
 
           const res =
             await fetch(
-              "/api/auth/get-session"
+              `${API_URL}/auth/me`,
+              {
+                credentials: "include",
+              }
             );
 
           const data =
@@ -61,6 +72,21 @@ const Navbar = () => {
 
     getSession();
 
+    const handleAuthChange = () => {
+      getSession();
+    };
+
+    window.addEventListener(
+      "auth-change",
+      handleAuthChange
+    );
+
+    return () => {
+      window.removeEventListener(
+        "auth-change",
+        handleAuthChange
+      );
+    };
   }, []);
 
   const handleLogout =
@@ -68,25 +94,27 @@ const Navbar = () => {
 
       try {
 
-        await fetch(
-          "/api/auth/sign-out",
+        const res = await fetch(
+          `${API_URL}/auth/signout`,
           {
             method: "POST",
+            credentials: "include",
           }
         );
 
+        if (!res.ok) {
+          throw new Error("Logout failed");
+        }
+
         setUser(null);
-console.log(user);
-        return;
-        window.location.href =
-          "/login";
+        router.push("/login");
 
       } catch (error) {
 
         console.log(error);
       }
     };
-console.log(user);
+
   const navLinks = (
     <>
       <li>

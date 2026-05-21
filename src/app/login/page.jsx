@@ -22,6 +22,13 @@ import {
 export default function LoginPage() {
 
   const router = useRouter();
+  const redirectTo =
+    typeof window !== "undefined"
+      ? new URLSearchParams(window.location.search).get("redirect") || "/"
+      : "/";
+
+  const API_URL =
+    process.env.NEXT_PUBLIC_API_URL || "";
 
   const [error, setError] =
     useState("");
@@ -50,10 +57,10 @@ export default function LoginPage() {
 
         const res =
           await fetch(
-            "/api/auth/sign-in/email",
+            `${API_URL}/auth/login`,
             {
               method: "POST",
-
+              credentials: "include",
               headers: {
                 "Content-Type":
                   "application/json",
@@ -79,7 +86,13 @@ export default function LoginPage() {
           return;
         }
 
-        router.push("/");
+        if (typeof window !== "undefined") {
+          window.dispatchEvent(
+            new Event("auth-change")
+          );
+        }
+
+        router.push(redirectTo);
 
         router.refresh();
 

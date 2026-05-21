@@ -19,6 +19,9 @@ export default function PrivateRoute({
   const pathname =
     usePathname();
 
+  const API_URL =
+    process.env.NEXT_PUBLIC_API_URL || "";
+
   const [loading, setLoading] =
     useState(true);
 
@@ -34,7 +37,10 @@ export default function PrivateRoute({
 
           const res =
             await fetch(
-              "/api/auth/get-session"
+              `${API_URL}/auth/me`,
+              {
+                credentials: "include",
+              }
             );
 
           const data =

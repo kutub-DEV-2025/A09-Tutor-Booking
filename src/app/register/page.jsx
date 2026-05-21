@@ -8,6 +8,9 @@ export default function RegisterPage() {
 
   const router = useRouter();
 
+  const API_URL =
+    process.env.NEXT_PUBLIC_API_URL || "";
+
   const [error, setError] =
     useState("");
 
@@ -39,9 +42,10 @@ export default function RegisterPage() {
       try {
 
         const res = await fetch(
-          "/api/auth/sign-up/email",
+          `${API_URL}/auth/register`,
           {
             method: "POST",
+            credentials: "include",
 
             headers: {
               "Content-Type":
@@ -70,7 +74,7 @@ export default function RegisterPage() {
           return;
         }
 
-        router.push("/");
+        router.push("/login");
         router.refresh();
 
       } catch (err) {

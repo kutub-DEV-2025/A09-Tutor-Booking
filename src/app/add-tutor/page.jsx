@@ -36,6 +36,7 @@ export default function AddTutorPage() {
         `${process.env.NEXT_PUBLIC_API_URL}/tutors`,
         {
           method: 'POST',
+          credentials: 'include',
           headers: {
             'Content-Type': 'application/json',
           },
