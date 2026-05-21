@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { CiLocationOn } from "react-icons/ci";
+
 import {
   FaFacebook,
   FaTwitter,
@@ -9,108 +11,155 @@ import {
 } from "react-icons/fa";
 
 const Footer = () => {
+
   return (
-    <footer className="relative bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white mt-24 overflow-hidden">
+    <footer className="bg-base-200 text-base-content mt-24 border-t border-base-300">
 
+      <div className="max-w-7xl mx-auto px-6 py-14">
 
-      <div className="absolute top-0 left-0 w-72 h-72 bg-primary/20 blur-3xl rounded-full"></div>
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/10 blur-3xl rounded-full"></div>
+        {/* TOP GRID */}
 
-      <div className="max-w-7xl mx-auto px-6 py-16 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
 
-     
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          {/* BRAND */}
 
           <div>
-            <h2 className="text-3xl font-bold text-primary">
+
+            <h2 className="text-3xl font-extrabold text-primary">
+
               MediQueue
+
             </h2>
 
-            <p className="mt-5 text-sm text-slate-300 leading-6">
-              Book tutors easily and improve your learning experience online.
-              Learn smarter with expert guidance and flexible scheduling.
+            <p className="mt-4 text-sm text-base-content/70 leading-6">
+
+              A smart tutor booking platform to
+              connect students with expert tutors.
+              Learn faster, schedule smarter.
+
             </p>
 
-           
-            <div className="flex gap-4 mt-6">
+            {/* SOCIAL */}
 
-              <a className="p-2 bg-white/10 rounded-full hover:bg-primary transition">
+            <div className="flex gap-3 mt-6">
+
+              <a className="btn btn-circle btn-sm btn-outline hover:btn-primary">
+
                 <FaFacebook />
+
               </a>
 
-              <a className="p-2 bg-white/10 rounded-full hover:bg-primary transition">
+              <a className="btn btn-circle btn-sm btn-outline hover:btn-primary">
+
                 <FaTwitter />
+
               </a>
 
-              <a className="p-2 bg-white/10 rounded-full hover:bg-primary transition">
+              <a className="btn btn-circle btn-sm btn-outline hover:btn-primary">
+
                 <FaGithub />
+
               </a>
 
-              <a className="p-2 bg-white/10 rounded-full hover:bg-primary transition">
+              <a className="btn btn-circle btn-sm btn-outline hover:btn-primary">
+
                 <FaEnvelope />
+
               </a>
 
             </div>
+
+          </div>
+
+          {/* SERVICES */}
+
+          <div>
+
+            <h3 className="text-xl font-semibold mb-5">
+
+              Services
+
+            </h3>
+
+            <ul className="space-y-3 text-sm text-base-content/70">
+
+              <li className="hover:text-primary transition cursor-pointer">
+
+                Online Tutoring
+
+              </li>
+
+              <li className="hover:text-primary transition cursor-pointer">
+
+                Offline Classes
+
+              </li>
+
+              <li className="hover:text-primary transition cursor-pointer">
+
+                Exam Preparation
+
+              </li>
+
+              <li className="hover:text-primary transition cursor-pointer">
+
+                Study Support
+
+              </li>
+
+            </ul>
+
           </div>
 
         
-          <div>
-            <h2 className="text-xl font-semibold mb-5 text-white">
-              Services
-            </h2>
 
-            <ul className="space-y-3 text-sm text-slate-300">
-              <li className="hover:text-primary cursor-pointer transition">
-                Online Tutoring
-              </li>
-              <li className="hover:text-primary cursor-pointer transition">
-                Offline Classes
-              </li>
-              <li className="hover:text-primary cursor-pointer transition">
-                Exam Preparation
-              </li>
-              <li className="hover:text-primary cursor-pointer transition">
-                Study Support
-              </li>
-            </ul>
-          </div>
-
-          
           <div>
-            <h2 className="text-xl font-semibold mb-5 text-white">
+
+            <h3 className="text-xl font-semibold mb-5">
+
               Contact
-            </h2>
 
-            <div className="space-y-3 text-sm text-slate-300">
+            </h3>
+
+            <div className="space-y-3 text-sm text-base-content/70">
 
               <p className="flex items-center gap-2">
+
                 <FaEnvelope className="text-primary" />
+
                 support@mediqueue.com
+
               </p>
 
-              <p>📞 +880123456789</p>
+              <p>📞 +8801770141411</p>
 
-              <p>📍 Dhaka, Bangladesh</p>
+              <p className="flex "> <CiLocationOn />Jhenaidah, Bangladesh</p>
 
             </div>
 
-            
             <Link
               href="/tutors"
-              className="inline-block mt-6 btn btn-primary btn-sm rounded-full"
+              className="btn btn-primary btn-sm mt-6 rounded-full"
             >
+
               Find Tutors
+
             </Link>
 
           </div>
 
         </div>
 
-        <div className="border-t border-white/10 mt-14 pt-6 text-center text-sm text-slate-400">
+     
+
+        <div className="border-t border-base-300 mt-10 pt-6 text-center text-sm text-base-content/60">
+
           © 2026 MediQueue. All rights reserved.
+
         </div>
 
       </div>
+
     </footer>
   );
 };
