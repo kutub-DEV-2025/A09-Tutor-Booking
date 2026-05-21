@@ -1,37 +1,48 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
+import {
+  useEffect,
+  useState,
+} from "react";
 
-const ThemeToggle = () => {
+export default function ThemeToggle() {
 
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] =
+    useState("light");
 
-  
   useEffect(() => {
 
-    const savedTheme = localStorage.getItem('theme');
+    const savedTheme =
+      localStorage.getItem(
+        "theme"
+      ) || "light";
 
-    if (savedTheme) {
-      setTheme(savedTheme);
-    }
+    setTheme(savedTheme);
+
+    document.documentElement.setAttribute(
+      "data-theme",
+      savedTheme
+    );
 
   }, []);
 
- 
-  useEffect(() => {
+  const toggleTheme = () => {
+
+    const newTheme =
+      theme === "light"
+        ? "dark"
+        : "light";
+
+    setTheme(newTheme);
 
     document.documentElement.setAttribute(
-      'data-theme',
-      theme
+      "data-theme",
+      newTheme
     );
 
-    localStorage.setItem('theme', theme);
-
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme(prev =>
-      prev === 'light' ? 'dark' : 'light'
+    localStorage.setItem(
+      "theme",
+      newTheme
     );
   };
 
@@ -40,9 +51,11 @@ const ThemeToggle = () => {
       onClick={toggleTheme}
       className="btn btn-sm btn-outline"
     >
-      {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
+
+      {theme === "light"
+        ? "🌙 Dark"
+        : "☀️ Light"}
+
     </button>
   );
-};
-
-export default ThemeToggle;
+}

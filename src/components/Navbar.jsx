@@ -1,7 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+
+import {
+  useEffect,
+  useState,
+} from "react";
+
+import ThemeToggle
+from "@/components/ThemeToggle";
 
 import {
   HiMenuAlt3,
@@ -152,10 +159,9 @@ const Navbar = () => {
 
       <div className="max-w-7xl mx-auto navbar px-4 lg:px-8">
 
-
         <div className="navbar-start gap-2">
 
-       
+          {/* MOBILE MENU */}
 
           <div className="dropdown lg:hidden">
 
@@ -181,8 +187,6 @@ const Navbar = () => {
 
           </div>
 
-      
-
           <Link
             href="/"
             className="flex items-center gap-2"
@@ -203,7 +207,9 @@ const Navbar = () => {
               </h1>
 
               <p className="text-xs text-base-content/60 -mt-1">
+
                 Smart Tutor Platform
+
               </p>
 
             </div>
@@ -211,8 +217,6 @@ const Navbar = () => {
           </Link>
 
         </div>
-
-        
 
         <div className="navbar-center hidden lg:flex">
 
@@ -224,14 +228,15 @@ const Navbar = () => {
 
         </div>
 
-      
-
         <div className="navbar-end gap-3">
+
+          
+
+          <ThemeToggle />
 
           {user ? (
             <>
 
-           
 
               <div className="hidden md:flex items-center gap-3 bg-base-200 px-3 py-2 rounded-full">
 
@@ -271,8 +276,6 @@ const Navbar = () => {
                 </div>
 
               </div>
-
-             
 
               <button
                 onClick={
